@@ -1,11 +1,12 @@
 version: '3.3'
 services:
   mysql:
-    image: mysql:latest
+    image: mysql:8.0
     container_name: securecapita
     environment:
       - MYSQL_DATABASE=securecapita
-      - MYSQL_USER=root
+      - MYSQL_USER=user
       - MYSQL_PASSWORD=changemeinprod
+      - MYSQL_ROOT_PASSWORD=changemeinprod
     ports:
       - "3306:3306"
