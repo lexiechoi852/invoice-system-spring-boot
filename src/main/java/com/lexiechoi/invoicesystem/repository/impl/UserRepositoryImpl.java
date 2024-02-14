@@ -51,7 +51,7 @@ public class UserRepositoryImpl implements UserRepository<User> {
 
             String verificationUrl = getVerificationUrl(UUID.randomUUID().toString(), ACCOUNT.getType());
             jdbcTemplate.update(
-                    INSERT_VERIFICATION_QUERY,
+                    INSERT_ACCOUNT_VERIFICATION_URL_QUERY,
                     Map.of("userId", user.getId(), "url", verificationUrl)
             );
             // emailService.sendVerificationUrl(user.getFirstName(), user.getEmail(), verificationUrl, ACCOUNT);
@@ -59,8 +59,6 @@ public class UserRepositoryImpl implements UserRepository<User> {
             user.setNotLocked(true);
 
             return user;
-        } catch (EmptyResultDataAccessException exception) {
-            throw new ApiException("No role found by name: " + ROLE_USER.name());
         } catch(Exception exception) {
             throw new ApiException("An error occurred. Please try again.");
         }
