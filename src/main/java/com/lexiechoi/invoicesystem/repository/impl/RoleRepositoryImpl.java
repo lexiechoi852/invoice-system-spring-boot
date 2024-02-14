@@ -25,7 +25,7 @@ public class RoleRepositoryImpl implements RoleRepository<Role> {
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
     @Override
-    public Role Create(Role data) {
+    public Role create(Role data) {
         return null;
     }
 
