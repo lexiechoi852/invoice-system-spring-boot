@@ -7,7 +7,6 @@ import com.lexiechoi.invoicesystem.repository.RoleRepository;
 import com.lexiechoi.invoicesystem.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -60,6 +59,7 @@ public class UserRepositoryImpl implements UserRepository<User> {
 
             return user;
         } catch(Exception exception) {
+            log.error(exception.getMessage());
             throw new ApiException("An error occurred. Please try again.");
         }
     }
@@ -99,7 +99,7 @@ public class UserRepositoryImpl implements UserRepository<User> {
     private String getVerificationUrl(String key, String type) {
         return ServletUriComponentsBuilder
                 .fromCurrentContextPath()
-                .path("/user/verify" + type + "/" + key)
+                .path("/user/verify/" + type + "/" + key)
                 .toUriString();
     }
 }
